@@ -161,12 +161,11 @@ class NaturalPersonTenDigitsCalculator
      */
     protected function removeSpecialParticles($word, $specialParticle){
         foreach ($specialParticle as $particle){
-            $particlePositions = [$particle . " ", " " . $particle];
+            $particlePositions = ["/".$particle . " \b/", "/ " . $particle."\b/"];
             foreach ($particlePositions as $particlePosition){
-                $word = str_replace($particlePosition, "", $word);
+                $word = preg_replace($particlePosition, "", $word);
             }
         }
-
         return $word;
     }
 
